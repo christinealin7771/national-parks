@@ -1,25 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Feed from './components/Feed';
+import background from './img/Background.png';
+import Parks from './components/Parks';
 
-function App() {
+import {withRouter} from 'react-router';
+
+
+
+function App(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div style ={{backgroundImage: `url(${background})`}}>
+        <Header/>
+
+          <Switch> 
+            
+            <Route exact path="/" render={(props) => <Feed />} />
+            <Route exact path={props.parkCode} render={(props) => <Parks />} />
+         
+          </Switch>
+        <Footer />
+      </div>
+    </Router>
   );
 }
+
 
 export default App;
