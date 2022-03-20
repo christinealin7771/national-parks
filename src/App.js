@@ -24,8 +24,8 @@ function App(props) {
           <Switch> 
             
             <Route exact path="/" render={(props) => <Feed />} />
-            <Route exact path={props.parkCode} render={(props) => <Parks />} />
-         
+            <Route exact path="/:id" render={(props) => <Parks />} />
+            
           </Switch>
         <Footer />
       </div>

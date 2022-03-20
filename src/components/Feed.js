@@ -41,10 +41,14 @@ class Feed extends React.Component
     {
         this.setState({readMore: !this.state.readMore, selected: key});
     }
+    setParkCode = key =>
+    {
+        this.setState({code: key});
+    }
 
     render()
     {
-        var{activities, isLoaded, readMore} = this.state;
+        var{activities, isLoaded, readMore,code} = this.state;
         
         //if isLoaded == true then 
         if(!isLoaded)
@@ -62,14 +66,12 @@ class Feed extends React.Component
                         <h4  onClick={()=>this.toggleActivity(act.id)}>{act.name} </h4>
                         <div>{readMore && this.state.selected === act.id?<div>{act.parks && act.parks.map((thePark) => (
                             <ul>
-                                <li>
+                                <li key={thePark.parkCode}>
                                     
-                                    <Parks code={this.state.code}/>
-                                    <a href= {thePark.parkCode} onClick={()=>this.setState({code: thePark.parkCode})}><div className="parkNames">{thePark.fullName} </div></a>
                                     
-                                    <Switch>
-                                        <Route exact path={thePark.parkCode} component={withRouter(Parks)} />
-                                    </Switch>
+                                    <a href= {thePark.parkCode} onClick={()=>this.setParkCode(thePark.parkCode) }><div className="parkNames">{thePark.fullName} </div></a>
+                                
+                                    
                                 </li>
                             </ul>
                             
